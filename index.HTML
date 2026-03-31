@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTC Revista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap');
+        
+        :root {
+            /* Colores extraídos de las imágenes: Dorado mate y Gris azulado */
+            --primary: #b5a26e;
+            --bg-site: #ffffff;
+            --text-main: #333f48;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-site);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Rollover Animado Funcional */
+        .card-modern {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-modern:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(51, 63, 72, 0.15);
+        }
+
+        .img-container {
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .img-container img {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-modern:hover .img-container img {
+            transform: scale(1.1);
+        }
+
+        /* Slider Animations */
+        .slide {
+            display: none;
+            animation: fade 1s ease-in-out;
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0.5; } 
+            to { opacity: 1; }
+        }
+
+        /* Menú Activo */
+        .nav-item {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+
+        .gradient-overlay {
+            background: linear-gradient(to top, rgba(51, 63, 72, 0.9) 0%, rgba(51, 63, 72, 0.4) 50%, transparent 100%);
+        }
+
+        .play-button-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(181, 162, 110, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(181, 162, 110, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(181, 162, 110, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ANUNCIO SUPERIOR -->
+    <div class="bg-[#333f48] text-white py-2.5 text-center text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] px-4">
+        <span>Publicidad:</span> <a href="#" class="underline hover:text-[#b5a26e] transition">Distrito Padel - Reserva tu cancha hoy</a>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="hidden md:flex space-x-5 text-zinc-400">
+                <a href="#" class="hover:text-[#b5a26e] transition-colors"><i class="fab fa-instagram text-lg"></i></a>
+                <a href="#" class="hover:text-[#b5a26e] transition-colors"><i class="fab fa-facebook-f text-lg"></i></a>
+                <a href="#" class="hover:text-[#b5a26e] transition-colors"><i class="fab fa-youtube text-lg"></i></a>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span class="brand-font text-4xl font-black tracking-tighter leading-none text-[#333f48]">TTC</span>
+                <span class="text-[9px] uppercase tracking-[0.4em] font-bold text-zinc-400">Revista Digital</span>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button class="text-zinc-500 hover:text-[#b5a26e] transition"><i class="fas fa-search text-lg"></i></button>
+                <button class="md:hidden text-zinc-800"><i class="fas fa-bars text-xl"></i></button>
+                <div class="hidden md:block">
+                    <a href="#" class="bg-[#b5a26e] text-white px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider hover:bg-[#a4915d] transition">Suscribirse</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="hidden md:flex justify-center bg-white border-t border-zinc-50 py-3">
+            <div class="flex space-x-10 text-[11px] font-extrabold uppercase tracking-widest text-zinc-500">
+                <a href="#" class="nav-item active text-[#333f48]">Inicio</a>
+                <a href="#" class="nav-item hover:text-[#333f48]">Entrevistas</a>
+                <a href="#" class="nav-item hover:text-[#333f48]">Estilo de Vida</a>
+                <a href="#" class="nav-item hover:text-[#333f48]">Vida Espiritual</a>
+                <a href="#" class="nav-item hover:text-[#333f48]">Familia</a>
+                <a href="#" class="nav-item hover:text-[#333f48]">Más <i class="fas fa-chevron-down text-[9px] ml-1"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 1. HERO SLIDER -->
+    <section class="container mx-auto px-6 py-8">
+        <div id="hero-slider" class="relative h-[600px] rounded-[32px] overflow-hidden shadow-2xl group cursor-default">
+            
+            <!-- Slide 1 -->
+            <div class="slide active h-full w-full">
+                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80" alt="Slider 1" class="w-full h-full object-cover">
+                <div class="absolute inset-0 gradient-overlay flex flex-col justify-end p-8 md:p-16">
+                    <h2 class="text-4xl md:text-7xl text-white font-black leading-none mb-6 max-w-4xl tracking-tight uppercase">Conectando con tu <span class="text-[#b5a26e] text-glow">Propósito</span></h2>
+                    <p class="text-zinc-300 text-lg md:text-xl max-w-2xl mb-8 font-medium">Redefiniendo la fe en un mundo hiperconectado y joven.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide h-full w-full">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80" alt="Slider 2" class="w-full h-full object-cover">
+                <div class="absolute inset-0 gradient-overlay flex flex-col justify-end p-8 md:p-16">
+                    <h2 class="text-4xl md:text-7xl text-white font-black leading-none mb-6 max-w-4xl tracking-tight uppercase">Viviendo en <span class="text-[#b5a26e]">Comunidad</span></h2>
+                    <p class="text-zinc-300 text-lg md:text-xl max-w-2xl mb-8 font-medium">Historias reales de personas que están cambiando su entorno.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide h-full w-full">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80" alt="Slider 3" class="w-full h-full object-cover">
+                <div class="absolute inset-0 gradient-overlay flex flex-col justify-end p-8 md:p-16">
+                    <h2 class="text-4xl md:text-7xl text-white font-black leading-none mb-6 max-w-4xl tracking-tight uppercase">Tu Voz <span class="text-[#b5a26e]">Importa</span></h2>
+                    <p class="text-zinc-300 text-lg md:text-xl max-w-2xl mb-8 font-medium">Liderazgo e influencia positiva para la generación actual.</p>
+                </div>
+            </div>
+
+            <button onclick="prevSlide()" class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 flex items-center justify-center hover:bg-[#b5a26e] transition-all z-40">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button onclick="nextSlide()" class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 flex items-center justify-center hover:bg-[#b5a26e] transition-all z-40">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="absolute bottom-8 right-8 flex space-x-2 z-30">
+                <div class="dot w-10 h-1.5 bg-white rounded-full transition-all duration-300 cursor-pointer" onclick="showSlide(0)"></div>
+                <div class="dot w-10 h-1.5 bg-white/20 rounded-full transition-all duration-300 cursor-pointer" onclick="showSlide(1)"></div>
+                <div class="dot w-10 h-1.5 bg-white/20 rounded-full transition-all duration-300 cursor-pointer" onclick="showSlide(2)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. LO MÁS RECIENTE -->
+    <section class="container mx-auto px-6 py-12">
+        <div class="flex items-center justify-between mb-10">
+            <h3 class="text-3xl font-black uppercase tracking-tighter">Lo más <span class="text-[#b5a26e]">Fresh</span></h3>
+            <div class="h-[2px] flex-grow mx-8 bg-zinc-100 hidden md:block"></div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="relative aspect-[3/4] rounded-3xl overflow-hidden card-modern cursor-pointer group">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#333f48]/90 p-6 flex flex-col justify-end">
+                    <span class="text-[#b5a26e] text-[9px] font-black uppercase mb-1">Cultura</span>
+                    <p class="text-white font-bold text-sm">Música que rompe esquemas</p>
+                </div>
+            </div>
+            <div class="relative aspect-[3/4] rounded-3xl overflow-hidden card-modern cursor-pointer group">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#333f48]/90 p-6 flex flex-col justify-end">
+                    <span class="text-[#b5a26e] text-[9px] font-black uppercase mb-1">Bienestar</span>
+                    <p class="text-white font-bold text-sm">Salud mental: El gran tabú</p>
+                </div>
+            </div>
+            <div class="relative aspect-[3/4] rounded-3xl overflow-hidden card-modern cursor-pointer group">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#333f48]/90 p-6 flex flex-col justify-end">
+                    <span class="text-[#b5a26e] text-[9px] font-black uppercase mb-1">Relaciones</span>
+                    <p class="text-white font-bold text-sm">Amistades reales</p>
+                </div>
+            </div>
+            <div class="relative aspect-[3/4] rounded-3xl overflow-hidden card-modern cursor-pointer group">
+                <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#333f48]/90 p-6 flex flex-col justify-end">
+                    <span class="text-[#b5a26e] text-[9px] font-black uppercase mb-1">Misiones</span>
+                    <p class="text-white font-bold text-sm">El viaje que lo cambió todo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN EDITORIAL -->
+    <section class="container mx-auto px-6 py-12">
+        <div class="bg-[#333f48] rounded-[40px] p-10 md:p-20 text-white flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <span class="text-[#b5a26e] font-black uppercase tracking-[0.3em] text-xs mb-4 block">Editorial del Mes</span>
+                <h3 class="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase">El impacto de lo <span class="italic text-[#b5a26e]">Invisible</span></h3>
+                <p class="text-zinc-400 text-lg mb-8 leading-relaxed">A veces lo que no se ve es lo que más importa. En esta edición exploramos el poder de las pequeñas acciones y la fe silenciosa que mueve montañas en la era del ruido digital.</p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-[#b5a26e] flex items-center justify-center font-bold">ED</div>
+                    <div>
+                        <p class="font-bold text-sm">Equipo Editorial TTC</p>
+                        <p class="text-zinc-500 text-xs uppercase tracking-widest">Marzo 2026</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1506784926709-22f1ec395907?auto=format&fit=crop&w=600&q=80" class="rounded-3xl shadow-2xl scale-110 -rotate-3">
+                <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=600&q=80" class="rounded-3xl shadow-2xl translate-y-8 rotate-3">
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ARTÍCULOS DESTACADOS -->
+    <section class="bg-zinc-50 py-24">
+        <div class="container mx-auto px-6 text-center mb-16">
+            <h3 class="text-4xl font-black uppercase tracking-tighter mb-4">Artículos Destacados</h3>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <article class="card-modern group cursor-pointer bg-white p-4 rounded-[24px]">
+                    <div class="img-container aspect-video mb-6">
+                        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-[#b5a26e] text-[10px] font-black uppercase tracking-widest mb-3 block">Liderazgo</span>
+                    <h4 class="text-2xl font-black leading-tight mb-4 group-hover:text-[#b5a26e] transition-colors uppercase">La nueva cara del liderazgo</h4>
+                    <p class="text-zinc-500 text-sm mb-6 leading-relaxed">¿Cómo influir en tu generación siendo fiel a tus valores?</p>
+                </article>
+                <article class="card-modern group cursor-pointer bg-white p-4 rounded-[24px]">
+                    <div class="img-container aspect-video mb-6">
+                        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-[#b5a26e] text-[10px] font-black uppercase tracking-widest mb-3 block">Estilo de Vida</span>
+                    <h4 class="text-2xl font-black leading-tight mb-4 group-hover:text-[#b5a26e] transition-colors uppercase">Moda con sentido: Upcycling</h4>
+                    <p class="text-zinc-500 text-sm mb-6 leading-relaxed">Ropa que cuenta historias y cuida el planeta.</p>
+                </article>
+                <article class="card-modern group cursor-pointer bg-white p-4 rounded-[24px]">
+                    <div class="img-container aspect-video mb-6">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-[#b5a26e] text-[10px] font-black uppercase tracking-widest mb-3 block">Comunidad</span>
+                    <h4 class="text-2xl font-black leading-tight mb-4 group-hover:text-[#b5a26e] transition-colors uppercase">Finanzas y propósito</h4>
+                    <p class="text-zinc-500 text-sm mb-6 leading-relaxed">Administra tu futuro sin perder de vista lo esencial.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. VIDEOS / ENTREVISTAS -->
+    <section class="container mx-auto px-6 py-24">
+        <div class="flex items-center justify-between mb-12">
+            <h3 class="text-3xl font-black uppercase tracking-tighter">Entrevistas & <span class="text-[#b5a26e]">Videos</span></h3>
+            <div class="h-[2px] flex-grow mx-8 bg-zinc-100 hidden md:block"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="relative rounded-[48px] overflow-hidden group cursor-pointer shadow-2xl h-[500px]">
+                <!-- IMAGEN ACTUALIZADA PARA "VOCES QUE INSPIRAN CAMBIO" -->
+                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Micrófono de entrevista profesional">
+                <div class="absolute inset-0 bg-[#333f48]/40"></div>
+                <div class="absolute inset-0 flex flex-col justify-between p-10 z-20 text-white">
+                    <span class="bg-[#b5a26e] px-5 py-2 rounded-full w-fit text-[10px] font-black uppercase tracking-widest">Entrevista Exclusiva</span>
+                    <div class="flex items-center space-x-8">
+                        <div class="w-20 h-20 rounded-full bg-white text-[#b5a26e] flex items-center justify-center text-2xl play-button-pulse"><i class="fas fa-play"></i></div>
+                        <h4 class="text-3xl font-black uppercase tracking-tighter">Voces que inspiran cambio</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <!-- Mini Videos -->
+                <div class="bg-zinc-50 rounded-[32px] p-4 flex items-center group cursor-pointer hover:bg-white hover:shadow-xl transition-all">
+                    <div class="w-32 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="ml-6">
+                        <h5 class="font-black group-hover:text-[#b5a26e] transition uppercase text-sm">Futuro del hogar</h5>
+                        <p class="text-zinc-500 text-xs italic">Conversaciones sobre convivencia sana.</p>
+                    </div>
+                </div>
+                <div class="bg-zinc-50 rounded-[32px] p-4 flex items-center group cursor-pointer hover:bg-white hover:shadow-xl transition-all">
+                    <div class="w-32 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="ml-6">
+                        <h5 class="font-black group-hover:text-[#b5a26e] transition uppercase text-sm">Propósito Real</h5>
+                        <p class="text-zinc-500 text-xs italic">Invitado: Líderes del cambio.</p>
+                    </div>
+                </div>
+                <div class="bg-zinc-50 rounded-[32px] p-4 flex items-center group cursor-pointer hover:bg-white hover:shadow-xl transition-all">
+                    <div class="w-32 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="ml-6">
+                        <h5 class="font-black group-hover:text-[#b5a26e] transition uppercase text-sm">Misiones urbanas</h5>
+                        <p class="text-zinc-500 text-xs italic">Impactando la ciudad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SECCIÓN FAMILIA -->
+    <section class="bg-[#b5a26e] py-24">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <h3 class="text-5xl font-black text-white leading-none mb-8 uppercase">Familia:<br><span class="opacity-70 text-4xl">El mejor equipo</span></h3>
+                <p class="text-white/80 text-lg mb-8 max-w-md">Descubre herramientas para fortalecer el núcleo más importante de la sociedad. Artículos, consejos y guías prácticas para vivir una familia unida.</p>
+                <button class="bg-[#333f48] text-white px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-transform shadow-xl">Ver recursos de familia</button>
+            </div>
+            <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80" class="rounded-3xl shadow-2xl mt-8">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" class="rounded-3xl shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER COMPLETO -->
+    <footer class="bg-[#333f48] text-zinc-400 py-24">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Col 1 -->
+                <div class="col-span-1 md:col-span-1">
+                    <span class="brand-font text-4xl text-white font-black block mb-6">TTC</span>
+                    <p class="text-sm leading-relaxed mb-6">Inspirando a las nuevas generaciones a vivir con propósito, fe y autenticidad en el mundo digital.</p>
+                    <div class="flex space-x-5 text-xl">
+                        <a href="#" class="hover:text-[#b5a26e] transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-[#b5a26e] transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-[#b5a26e] transition"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-[#b5a26e] transition"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <!-- Col 2 -->
+                <div>
+                    <h5 class="text-white font-black text-xs uppercase tracking-widest mb-8">Revista</h5>
+                    <ul class="space-y-4 text-xs font-bold uppercase tracking-wider">
+                        <li><a href="#" class="hover:text-white transition">Sobre Nosotros</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ediciones Impresas</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pauta con Nosotros</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog de Noticias</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3 -->
+                <div>
+                    <h5 class="text-white font-black text-xs uppercase tracking-widest mb-8">Contacto</h5>
+                    <ul class="space-y-4 text-xs font-bold uppercase tracking-wider">
+                        <li><i class="fas fa-envelope text-[#b5a26e] mr-2"></i> hola@ttcrevista.com</li>
+                        <li><i class="fas fa-phone text-[#b5a26e] mr-2"></i> +57 300 123 4567</li>
+                        <li><i class="fas fa-map-marker-alt text-[#b5a26e] mr-2"></i> Bogotá, Colombia</li>
+                    </ul>
+                </div>
+                <!-- Col 4 -->
+                <div>
+                    <h5 class="text-white font-black text-xs uppercase tracking-widest mb-8">Newsletter</h5>
+                    <p class="text-xs mb-4">Recibe lo mejor de TTC cada semana.</p>
+                    <div class="flex border border-zinc-800 rounded-lg overflow-hidden">
+                        <input type="email" placeholder="Email" class="bg-transparent px-4 py-3 text-xs w-full focus:outline-none">
+                        <button class="bg-[#b5a26e] text-white px-4 py-3 text-[10px] font-black uppercase">Unirse</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-zinc-900 pt-10 text-center">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-white/40">&copy; 2026 TTC REVISTA | TODOS LOS DERECHOS RESERVADOS</p>
+                <p class="text-zinc-600 text-[8px] mt-2 tracking-widest uppercase">Diseñado por Marku - Powered by Faith</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN IR ARRIBA -->
+    <a href="#" class="fixed bottom-10 right-10 bg-[#b5a26e] text-white w-12 h-12 rounded-xl shadow-2xl flex items-center justify-center hover:-translate-y-2 transition-all z-50">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let slideInterval;
+
+        function showSlide(index) {
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+            currentSlide = index;
+
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => {
+                d.classList.remove('bg-white');
+                d.classList.add('bg-white/20');
+            });
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('bg-white');
+            dots[currentSlide].classList.remove('bg-white/20');
+            
+            resetTimer();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 6000);
+        }
+
+        resetTimer();
+    </script>
+
+</body>
+</html>
